@@ -3,6 +3,6 @@ export default () => {
 
   return {
     gsap: nuxtApp.$gsap,
-    flip: nuxtApp.$Flip,
+    Flip: nuxtApp.$Flip,
   };
 };
