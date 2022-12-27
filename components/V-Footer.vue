@@ -9,7 +9,7 @@
 
 <style lang="scss">
 .footer {
-  width: 90%;
+  width: 80%;
   max-width: 75ch;
 
   margin: 0 auto;
