@@ -3,25 +3,28 @@ import type { Work } from '~/types/work';
 
 const { data: works } = await useFetch<Work[]>('/api/work');
 
-const animation = useCallbackAnimation();
 const { gsap, Flip } = useGsap();
+const animation = useCallbackAnimation();
+const store = useStore();
 
-function log(e: MouseEvent) {
+function animateImage(e: MouseEvent) {
   const target = e.target as HTMLElement;
   let image = target.querySelector('img');
 
   if (!image) image = target.parentElement?.querySelector('img') || null;
 
+  store.transitioningWithImage = true;
+
   animation.value = gsap.to(image, {
     delay: 0,
     onStart: () => {
-      const state = Flip.getState(image);
+      const state = Flip.getState(image, {
+        props: 'width, height, transform',
+      });
 
       image!.classList.add('fixed');
 
       Flip.from(state, {
-        xPercent: -50,
-        yPercent: -50,
         duration: 1,
         ease: 'expo.out',
       });
@@ -44,7 +47,7 @@ function log(e: MouseEvent) {
           <NuxtLink
             :to="`/work/${work.link}`"
             class="main__list__item__link"
-            @click.native.capture="log"
+            @click.native.capture="animateImage"
           >
             <p class="main__list__item__link__text">
               {{ work.name }}
@@ -67,20 +70,16 @@ function log(e: MouseEvent) {
 </template>
 
 <style lang="scss">
-.wrapper {
-  margin: 0 auto;
-  padding: 16rem 0 8rem;
-
-  width: 90%;
-  max-width: 85ch;
-}
-
 .header {
   margin-bottom: 12rem;
   opacity: 0.9;
 
   &__title {
-    font-size: 3.75rem;
+    font-size: 3.125rem;
+
+    @media screen and (min-width: 624px) {
+      font-size: 3.75rem;
+    }
   }
 }
 
