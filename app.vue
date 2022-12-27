@@ -3,6 +3,8 @@ import '@fontsource/dm-sans/latin.css';
 
 import DMSansLatinNormal from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2';
 
+const overlay = ref({});
+
 useHead(
   {
     link: [
@@ -21,14 +23,22 @@ useHead(
 
 <template>
   <NuxtLayout>
-    <NuxtPage />
+    <Transition
+      mode="out-in"
+      :css="false"
+      @enter="overlay.enterPageAnim"
+      @leave="overlay.leavePageAnim"
+    >
+      <div :key="$route.fullPath">
+        <!-- binding the `:transition` to nuxt-page breaks animation -->
+        <!-- without wrapping into div, vue says that nuxt-page renders non root element -->
+        <NuxtPage />
+      </div>
+    </Transition>
 
-    <footer class="prose m-auto text-center">
-      <p class="text-size-xl">
-        Inspired by
-        <NuxtLink href="https://www.discoveroutpost.com">Outpost</NuxtLink>
-      </p>
-    </footer>
+    <VFooter />
+
+    <VOverlay ref="overlay" />
   </NuxtLayout>
 </template>
 
