@@ -31,6 +31,10 @@ function animateImage(e: MouseEvent) {
     },
   });
 }
+
+useHead({
+  title: 'Route Animations',
+});
 </script>
 
 <template>

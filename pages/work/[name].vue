@@ -52,6 +52,10 @@ definePageMeta({
 onMounted(() => {
   gsap.set(image.value, { position: 'static', zIndex: 0, delay: 1.5 });
 });
+
+useHead({
+  title: () => `${work.value?.name} - Route Animations`,
+});
 </script>
 
 <template>
