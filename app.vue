@@ -20,7 +20,7 @@ useHead(
 </script>
 
 <template>
-  <NuxtPage antialiased />
+  <NuxtPage />
 </template>
 
 <style>
@@ -31,6 +31,10 @@ body,
     'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
     sans-serif;
   text-rendering: geometricPrecision;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: grayscale;
 
   height: 100vh;
   margin: 0;
