@@ -60,6 +60,14 @@ body,
   padding: 0;
 }
 
+.wrapper {
+  margin: 0 auto;
+  padding: 16rem 0 8rem;
+
+  width: 90%;
+  max-width: 85ch;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     background: #222;
