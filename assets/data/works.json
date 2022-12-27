@@ -1,6 +1,7 @@
 [
   {
     "name": "Leiada Krozjhen",
+    "link": "leiada-krozjhen",
     "image": {
       "src": "/img/1.jpg",
       "width": 640,
@@ -14,6 +15,7 @@
   },
   {
     "name": "Vitaly Skachko",
+    "link": "vitaly-skachko",
     "image": {
       "src": "/img/2.jpg",
       "width": 640,
@@ -27,6 +29,7 @@
   },
   {
     "name": "Kawê Rodrigues",
+    "link": "kawe-rodrigues",
     "image": {
       "src": "/img/3.jpg",
       "width": 640,
