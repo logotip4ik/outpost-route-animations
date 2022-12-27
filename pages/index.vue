@@ -1,41 +1,63 @@
 <script setup lang="ts">
-const { data: routes } = useFetch('/api/work');
+import type { Work } from '~/types/work';
 
-function generateWorkPagePath(workName: string) {
-  const encodedName = encodeURIComponent(workName);
-  return `/work/${encodedName}`;
+const { data: works } = await useFetch<Work[]>('/api/work');
+
+const animation = useCallbackAnimation();
+const { gsap, Flip } = useGsap();
+
+function log(e: MouseEvent) {
+  const target = e.target as HTMLElement;
+  let image = target.querySelector('img');
+
+  if (!image) image = target.parentElement?.querySelector('img') || null;
+
+  animation.value = gsap.to(image, {
+    delay: 0,
+    onStart: () => {
+      const state = Flip.getState(image);
+
+      image!.classList.add('fixed');
+
+      Flip.from(state, {
+        xPercent: -50,
+        yPercent: -50,
+        duration: 1,
+        ease: 'expo.out',
+      });
+    },
+  });
 }
 </script>
 
 <template>
-  <div class="pt-64 pb-32 max-w-85ch w-90% m-auto">
-    <header class="mb-48 op-90">
-      <h1 class="text-size-6xl">Outpost inspired animations</h1>
+  <div class="wrapper">
+    <header class="header">
+      <h1 class="header__title">Outpost inspired animations</h1>
     </header>
 
-    <main>
-      <h2 class="pl-4 text-size-5xl sm:pl-8">Works</h2>
+    <main class="main">
+      <h2 class="main__title">Works</h2>
 
-      <ul class="list-none m-0 p-0">
-        <li v-for="route in routes" :key="route.name" class="mb-12rem">
+      <ul class="main__list">
+        <li v-for="work in works" :key="work.name" class="main__list__item">
           <NuxtLink
-            :to="generateWorkPagePath(route.name)"
-            class="flex flex-col-reverse justify-center content-end w-full decoration-none text-current op-85 hover:op-100 transition sm:flex-row"
+            :to="`/work/${work.link}`"
+            class="main__list__item__link"
+            @click.native.capture="log"
           >
-            <p
-              class="text-center block m-0 h-min uppercase text-size-4xl sm:(mt-auto mb--1.5 mr-5 w-min text-right)"
-            >
-              {{ route.name }}
+            <p class="main__list__item__link__text">
+              {{ work.name }}
             </p>
 
             <!-- not really appropriate alt attr... -->
             <img
-              :src="route.image.src"
-              :width="route.image.width"
-              :height="route.image.height"
-              :alt="`Photo by ${route.name}`"
+              :src="work.image.src"
+              :width="work.image.width"
+              :height="work.image.height"
+              :alt="`Photo by ${work.name}`"
               loading="lazy"
-              class="block w-full max-h-24rem object-cover sm:(max-w-50%)"
+              class="main__list__item__link__img"
             />
           </NuxtLink>
         </li>
@@ -44,4 +66,110 @@ function generateWorkPagePath(workName: string) {
   </div>
 </template>
 
-<style></style>
+<style lang="scss">
+.wrapper {
+  margin: 0 auto;
+  padding: 16rem 0 8rem;
+
+  width: 90%;
+  max-width: 85ch;
+}
+
+.header {
+  margin-bottom: 12rem;
+  opacity: 0.9;
+
+  &__title {
+    font-size: 3.75rem;
+  }
+}
+
+.main {
+  &__title {
+    font-size: 3rem;
+    padding-left: 1rem;
+
+    @media screen and (min-width: 624px) {
+      padding-left: 2rem;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+
+    &__item {
+      margin-bottom: 12rem;
+
+      &__link {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+
+        text-decoration: none;
+        color: currentColor;
+
+        width: 100%;
+
+        &:is(:hover, :focus-visible) {
+          text-decoration: underline;
+        }
+
+        @media screen and (min-width: 624px) {
+          flex-direction: row;
+        }
+
+        &__text {
+          display: block;
+
+          font-size: 2.25rem;
+          text-align: center;
+          text-transform: uppercase;
+
+          margin: 0;
+
+          @media screen and (min-width: 624px) {
+            text-align: right;
+
+            width: min-content;
+
+            margin: auto 1.25rem -0.25rem 0;
+          }
+        }
+
+        &__img {
+          display: block;
+
+          width: 100%;
+          height: 100vw;
+          max-height: 24rem;
+
+          object-fit: cover;
+
+          @media screen and (min-width: 624px) {
+            max-width: 50%;
+          }
+
+          &.fixed {
+            position: fixed;
+            z-index: 10;
+            top: 50%;
+            left: 50%;
+
+            width: 100vw;
+            height: 100vw;
+
+            max-width: 50vw;
+            max-height: 50vh;
+
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+  }
+}
+</style>
