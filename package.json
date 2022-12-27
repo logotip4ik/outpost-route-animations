@@ -8,13 +8,14 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.0.0",
+    "nuxt": "npm:nuxt3@latest",
     "prettier": "^2.8.1"
   },
   "packageManager": "yarn@3.3.1",
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
-    "@unocss/nuxt": "^0.48.0",
-    "gsap": "^3.11.4"
+    "gsap": "^3.11.4",
+    "normalize.css": "^8.0.1",
+    "sass": "^1.57.1"
   }
 }
