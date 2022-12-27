@@ -20,7 +20,16 @@ useHead(
 </script>
 
 <template>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+
+    <footer class="prose m-auto text-center">
+      <p class="text-size-xl">
+        Inspired by
+        <NuxtLink href="https://www.discoveroutpost.com">Outpost</NuxtLink>
+      </p>
+    </footer>
+  </NuxtLayout>
 </template>
 
 <style>
