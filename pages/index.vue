@@ -10,17 +10,47 @@ function generateWorkPagePath(workName: string) {
 </script>
 
 <template>
-  <div>
-    <header>
-      <h1>Outpost inspired animations</h1>
+  <div pt-64 pb-32 max-w-85ch w-90% m-auto>
+    <header mb-48 op-90>
+      <h1 text-size-6xl>Outpost inspired animations</h1>
     </header>
 
     <main>
-      <h2>Works</h2>
+      <h2 pl-4 text-size-5xl sm:pl-8>Works</h2>
 
-      <ul>
-        <li v-for="route in routes" :key="route.name">
-          <NuxtLink :to="generateWorkPagePath(route.name)">
+      <ul list-none m-0 p-0>
+        <li v-for="route in routes" :key="route.name" mb-12rem>
+          <NuxtLink
+            :to="generateWorkPagePath(route.name)"
+            flex
+            flex-col-reverse
+            justify-center
+            content-end
+            w-full
+            decoration-none
+            text-current
+            op-85
+            hover:op-100
+            transition
+            sm:flex-row
+          >
+            <p
+              text-center
+              block
+              m-0
+              h-min
+              uppercase
+              text-size-4xl
+              sm:(
+              mt-auto
+              mb--1.5
+              mr-5
+              w-min
+              text-right)
+            >
+              {{ route.name }}
+            </p>
+
             <!-- not really appropriate alt attr... -->
             <img
               :src="route.image.src"
@@ -28,9 +58,12 @@ function generateWorkPagePath(workName: string) {
               :height="route.image.height"
               :alt="`Photo by ${route.name}`"
               loading="lazy"
+              block
+              w-full
+              max-h-24rem
+              object-cover
+              sm:(max-w-50%)
             />
-
-            <p>{{ route.name }}</p>
           </NuxtLink>
         </li>
       </ul>
