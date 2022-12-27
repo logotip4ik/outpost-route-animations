@@ -14,7 +14,6 @@
   "packageManager": "yarn@3.3.1",
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
-    "@master/css": "^1.37.8",
     "@unocss/nuxt": "^0.48.0",
     "gsap": "^3.11.4"
   }
