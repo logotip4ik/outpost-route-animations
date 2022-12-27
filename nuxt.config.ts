@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   modules: ['@unocss/nuxt'],
 
-  css: ['normalize.css/normalize.css'],
+  css: ['@unocss/reset/normalize.css'],
 
   build: {
     transpile: ['gsap'],

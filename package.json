@@ -16,7 +16,6 @@
     "@fontsource/dm-sans": "^4.5.9",
     "@master/css": "^1.37.8",
     "@unocss/nuxt": "^0.48.0",
-    "gsap": "^3.11.4",
-    "normalize.css": "^8.0.1"
+    "gsap": "^3.11.4"
   }
 }
