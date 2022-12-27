@@ -1,5 +1,4 @@
 <script setup>
-import '@master/css';
 import '@fontsource/dm-sans/latin.css';
 
 import DMSansLatinNormal from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2';
@@ -21,7 +20,7 @@ useHead(
 </script>
 
 <template>
-  <NuxtPage />
+  <NuxtPage antialiased />
 </template>
 
 <style>
@@ -32,9 +31,6 @@ body,
     'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
     sans-serif;
   text-rendering: geometricPrecision;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 
   height: 100vh;
   margin: 0;
